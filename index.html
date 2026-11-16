@@ -1,1 +1,451 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kwako, Mpenzi Wangu ❤</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg1:#1a0612; --bg2:#3b0a24; --rose:#ff4d8d; --pink:#ff9ec4; --gold:#ffd9a0; --text:#fff0f5;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Poppins',sans-serif; color:var(--text);
+    background:radial-gradient(ellipse at top,var(--bg2),var(--bg1) 70%) fixed;
+    overflow-x:hidden; line-height:1.7;
+  }
+  #hearts{position:fixed;inset:0;pointer-events:none;z-index:0}
+  section{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:70px 22px;text-align:center}
+  .script{font-family:'Great Vibes',cursive}
+  .serif{font-family:'Playfair Display',serif}
 
+  /* HERO */
+  .hero h1{font-size:clamp(3.2rem,12vw,7.5rem);line-height:1.1;
+    background:linear-gradient(90deg,var(--pink),var(--rose),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 0 40px rgba(255,77,141,.35);animation:glow 3s ease-in-out infinite alternate}
+  @keyframes glow{from{filter:drop-shadow(0 0 6px rgba(255,77,141,.4))}to{filter:drop-shadow(0 0 22px rgba(255,77,141,.9))}}
+  .hero .sub{margin-top:14px;font-size:1.1rem;color:var(--pink);letter-spacing:.15em;text-transform:uppercase;font-weight:300}
+  .nick{margin-top:28px;font-size:clamp(1.8rem,6vw,3rem);min-height:1.6em;color:var(--gold);transition:opacity .6s}
+  .scroll{position:absolute;bottom:26px;font-size:.85rem;color:var(--pink);animation:bob 1.8s infinite}
+  @keyframes bob{50%{transform:translateY(8px)}}
+
+  /* COUNTER */
+  h2{font-size:clamp(2rem,6vw,3.2rem);margin-bottom:34px;color:var(--pink)}
+  .counter{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;max-width:720px}
+  .box{background:rgba(255,255,255,.06);border:1px solid rgba(255,158,196,.3);backdrop-filter:blur(8px);
+    border-radius:20px;padding:20px 24px;min-width:110px;box-shadow:0 10px 40px rgba(255,77,141,.15)}
+  .box b{display:block;font-size:2.4rem;font-family:'Playfair Display',serif;color:var(--rose)}
+  .box span{font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;color:var(--pink)}
+  .since{margin-top:26px;color:var(--pink);font-style:italic}
+
+  /* REASONS */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;max-width:1000px;width:100%}
+  .card{background:linear-gradient(145deg,rgba(255,77,141,.16),rgba(255,255,255,.04));
+    border:1px solid rgba(255,158,196,.25);border-radius:22px;padding:30px 22px;
+    transition:transform .35s,box-shadow .35s;opacity:0;transform:translateY(30px)}
+  .card.show{opacity:1;transform:none}
+  .card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 18px 50px rgba(255,77,141,.35)}
+  .card .em{font-size:2.4rem;display:block;margin-bottom:10px}
+  .card h3{font-family:'Playfair Display',serif;color:var(--gold);margin-bottom:8px;font-weight:600}
+  .card p{font-weight:300;font-size:.95rem}
+
+  /* LETTER */
+  .letter{max-width:680px;background:rgba(255,255,255,.07);border:1px solid rgba(255,217,160,.3);
+    border-radius:26px;padding:42px 30px;backdrop-filter:blur(10px);box-shadow:0 20px 70px rgba(0,0,0,.4);text-align:left}
+  .letter p{font-family:'Playfair Display',serif;font-size:1.12rem;font-style:italic;min-height:12em;white-space:pre-wrap}
+  .sign{margin-top:22px;text-align:right;font-size:2.2rem;color:var(--gold)}
+
+  /* SURPRISE */
+  .btn{margin-top:10px;padding:16px 38px;border:none;border-radius:50px;cursor:pointer;font-size:1.05rem;font-family:inherit;color:#fff;
+    background:linear-gradient(90deg,var(--rose),#ff2e6e);box-shadow:0 10px 35px rgba(255,77,141,.5);transition:transform .25s}
+  .btn:hover{transform:scale(1.07)}
+  .big{font-size:clamp(2.4rem,8vw,5rem);margin-top:30px;color:var(--gold);opacity:0;transform:scale(.6);transition:all .9s cubic-bezier(.2,1.4,.4,1)}
+  .big.show{opacity:1;transform:scale(1)}
+  .final{margin-top:12px;color:var(--pink);opacity:0;transition:opacity 1.5s 0.6s}
+  .final.show{opacity:1}
+  /* GALLERY */
+  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;max-width:1000px;width:100%}
+  .photo{position:relative;aspect-ratio:3/4;border-radius:22px;overflow:hidden;cursor:pointer;
+    border:3px solid rgba(255,217,160,.5);box-shadow:0 14px 40px rgba(0,0,0,.45);
+    transition:transform .4s,box-shadow .4s;opacity:0;transform:translateY(30px) rotate(var(--r,0deg))}
+  .photo.show{opacity:1;transform:rotate(var(--r,0deg))}
+  .photo:hover{transform:scale(1.05) rotate(0deg);box-shadow:0 20px 60px rgba(255,77,141,.5)}
+  .photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .photo .ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:4rem;
+    background:linear-gradient(145deg,rgba(255,77,141,.35),rgba(59,10,36,.8))}
+  .photo .cap{position:absolute;left:0;right:0;bottom:0;padding:34px 14px 14px;font-size:1.5rem;color:#fff;
+    background:linear-gradient(transparent,rgba(26,6,18,.9))}
+  #lightbox{position:fixed;inset:0;z-index:50;background:rgba(10,2,7,.92);display:none;align-items:center;justify-content:center;
+    flex-direction:column;padding:20px;cursor:pointer}
+  #lightbox.open{display:flex}
+  #lightbox img{max-width:94vw;max-height:78vh;border-radius:18px;box-shadow:0 0 60px rgba(255,77,141,.5)}
+  #lightbox p{margin-top:16px;font-size:2rem;color:var(--gold)}
+
+  /* MUSIC */
+  #music{position:fixed;top:16px;right:16px;z-index:40;width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,158,196,.5);
+    background:rgba(26,6,18,.7);backdrop-filter:blur(8px);color:var(--pink);font-size:1.4rem;cursor:pointer;
+    box-shadow:0 6px 24px rgba(255,77,141,.35);transition:transform .25s}
+  #music:hover{transform:scale(1.1)}
+  #music.playing{animation:spin 6s linear infinite;color:var(--gold)}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .hint{position:fixed;top:24px;right:78px;z-index:40;font-size:.75rem;color:var(--pink);opacity:.85;transition:opacity .6s}
+
+  /* FINAL QUESTION */
+  .ask h2{font-size:clamp(2.4rem,8vw,4.6rem);color:var(--gold);margin-bottom:12px}
+  .ask .opts{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:26px;min-height:70px}
+  .btn.yes{font-size:1.3rem;padding:18px 54px;animation:pulse 1.6s infinite}
+  @keyframes pulse{50%{transform:scale(1.08);box-shadow:0 10px 55px rgba(255,77,141,.9)}}
+  .btn.no{background:rgba(255,255,255,.12);box-shadow:none;border:1px solid rgba(255,158,196,.4);color:var(--pink)}
+  .yesmsg{display:none;font-size:clamp(2.4rem,9vw,5.4rem);line-height:1.2;color:var(--gold);animation:glow 2s ease-in-out infinite alternate}
+  .yesmsg small{display:block;margin-top:14px;font-family:'Poppins',sans-serif;font-size:1.05rem;color:var(--pink)}
+
+  /* STEP FLOW */
+  #askBox{transition:opacity .35s}
+  .ask .opts .btn{margin-top:0}
+  .btn.yes{animation:pulse 1.6s infinite, pop 0.7s cubic-bezier(.2,1.6,.4,1)}
+
+  /* LOVE SCENE (baada ya Ndiyo) */
+  section,footer{transition:opacity .9s}
+  body.lovemode{overflow:hidden}
+  body.lovemode section, body.lovemode footer{opacity:0;pointer-events:none}
+  #love{position:fixed;inset:0;z-index:35;display:none;flex-direction:column;align-items:center;justify-content:center;
+    padding:16px;text-align:center;opacity:0;transition:opacity 1.2s;pointer-events:none}
+  #love.on{display:flex}
+  #love.vis{opacity:1}
+  #love button{pointer-events:auto}
+  .ring{--s:min(90vw,60vh);position:relative;width:var(--s);height:var(--s);font-size:calc(var(--s)*.042);
+    animation:beat 1.6s ease-in-out 4s infinite}
+  @keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.05)}30%{transform:scale(1)}45%{transform:scale(1.07)}}
+  #heartsLayer{position:absolute;inset:0}
+  #heartsLayer .h{position:absolute;line-height:1;transform:translate(-50%,-50%) scale(0);
+    animation:pop .7s cubic-bezier(.2,1.6,.4,1) forwards;filter:drop-shadow(0 0 6px rgba(255,77,141,.7))}
+  @keyframes pop{to{transform:translate(-50%,-50%) scale(1) rotate(var(--rot,0deg))}}
+  .btn.yes{animation:pulse 1.6s infinite}
+  .photoWrap{position:absolute;left:50%;top:51%;width:38%;height:38%;transform:translate(-50%,-50%);
+    filter:drop-shadow(0 0 18px rgba(255,77,141,.9));opacity:0;animation:fadein 1.5s 2.5s forwards}
+  @keyframes fadein{to{opacity:1}}
+  .photoHeart{width:100%;height:100%;clip-path:url(#heartClip);background:linear-gradient(145deg,#ff4d8d,#5a0f33)}
+  .photoHeart img{width:100%;height:100%;object-fit:cover;display:block}
+  .phfall{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:3rem;color:#fff}
+  .phfall small{font-size:.55rem;margin-top:2px;opacity:.85;line-height:1.2}
+  .loveTitle{font-size:clamp(2rem,7vw,3.6rem);color:var(--gold);margin-top:14px;opacity:0;animation:fadein 1.5s 3.2s forwards}
+  .loveSub{color:var(--pink);opacity:0;animation:fadein 1.5s 3.8s forwards;max-width:420px}
+  #back{margin-top:16px;padding:10px 26px;font-size:.9rem;opacity:0;animation:fadein 1.5s 5s forwards}
+
+  footer{position:relative;z-index:1;text-align:center;padding:30px;color:var(--pink);font-size:.85rem;opacity:.7}
+</style>
+</head>
+<body>
+<canvas id="hearts"></canvas>
+<audio id="song" loop preload="auto"></audio>
+<span class="hint" id="hint">Washa wimbo 🎶</span>
+<button id="music" aria-label="Wimbo">♪</button>
+<div id="lightbox"><img id="lbImg" alt=""><p class="script" id="lbCap"></p></div>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="sub">Kwa mtu muhimu zaidi maishani mwangu</p>
+  <h1 class="script" id="herName">My Love</h1>
+  <div class="nick script" id="nick">honey</div>
+  <div class="scroll">⌄ shuka chini ⌄</div>
+</section>
+
+<!-- COUNTER -->
+<section>
+  <h2 class="script">Muda wetu pamoja</h2>
+  <div class="counter">
+    <div class="box"><b id="d">0</b><span>Siku</span></div>
+    <div class="box"><b id="h">0</b><span>Masaa</span></div>
+    <div class="box"><b id="m">0</b><span>Dakika</span></div>
+    <div class="box"><b id="s">0</b><span>Sekunde</span></div>
+  </div>
+  <p class="since">…na kila sekunde nakupenda zaidi ❤</p>
+</section>
+
+<!-- REASONS -->
+<section>
+  <h2 class="script">Kwa nini nakupenda</h2>
+  <div class="grid" id="grid"></div>
+</section>
+
+<!-- GALLERY -->
+<section>
+  <h2 class="script">Kumbukumbu zetu</h2>
+  <div class="gallery" id="gallery"></div>
+</section>
+
+<!-- LETTER -->
+<section>
+  <h2 class="script">Barua kutoka moyoni</h2>
+  <div class="letter">
+    <p id="letter"></p>
+    <div class="sign script" id="sign">— Saimalyethomas</div>
+  </div>
+</section>
+
+<!-- SURPRISE -->
+<section>
+  <h2 class="script">Kuna kitu kidogo kwa ajili yako…</h2>
+  <button class="btn" id="open">Bonyeza hapa, tamu yangu 💌</button>
+  <div class="big script" id="big">Nakupenda ❤</div>
+  <p class="final serif" id="final">Leo, kesho na milele.</p>
+</section>
+
+<!-- FINAL QUESTION -->
+<section class="ask">
+  <div id="askBox">
+    <h2 class="script" id="askTitle">Utakuwa wangu milele?</h2>
+    <p class="serif" id="askText" style="color:var(--pink);max-width:520px;margin:0 auto">Jibu kwa moyo wako ❤</p>
+    <div class="opts">
+      <button class="btn no" id="step">Hapana</button>
+      <button class="btn yes" id="yes" style="display:none">Ndiyo! 💖</button>
+    </div>
+  </div>
+</section>
+
+<!-- LOVE SCENE -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <clipPath id="heartClip" clipPathUnits="objectBoundingBox">
+      <path d="M0.5,1 C0.5,1 0,0.62 0,0.3 C0,0.12 0.13,0 0.28,0 C0.38,0 0.46,0.05 0.5,0.14 C0.54,0.05 0.62,0 0.72,0 C0.87,0 1,0.12 1,0.3 C1,0.62 0.5,1 0.5,1 Z"/>
+    </clipPath>
+  </defs>
+</svg>
+<div id="love">
+  <div class="ring">
+    <div id="heartsLayer"></div>
+    <div class="photoWrap"><div class="photoHeart" id="photoHeart"></div></div>
+  </div>
+  <h2 class="script loveTitle" id="loveTitle"></h2>
+  <p class="serif loveSub">Wewe ni furaha yangu ya milele, tamu yangu.</p>
+  <button class="btn no" id="back">Rudi mwanzo ↑</button>
+</div>
+
+<footer>Imetengenezwa kwa upendo mwingi na Saimalyethomas ❤</footer>
+
+<script>
+/* ====== BADILISHA HAPA ====== */
+const CONFIG = {
+  herName: "Mpenzi Wangu",            // weka jina lake hapa, mfano "Neema"
+  startDate: "2024-02-14T00:00:00",   // tarehe mlipoanza kuwa pamoja
+  nicknames: ["honey","sweetheart","my love","my world","tamu yangu"],
+  signature: "— Saimalyethomas",
+  // Wimbo: weka faili lako (mfano music.mp3) kwenye folda moja na index.html
+  music: "music.mp3",
+  // Picha yake itakayokuwa katikati ya moyo mkubwa (iweke kwenye folda ya photos)
+  herPhoto: "photos/her.jpg",
+  // Picha: weka picha zako kwenye folda ya "photos" kisha andika majina hapa
+  photos: [
+    {src:"photos/1.jpg", cap:"Siku ya kwanza"},
+    {src:"photos/2.jpg", cap:"Tabasamu lako"},
+    {src:"photos/3.jpg", cap:"Pamoja daima"},
+    {src:"photos/4.jpg", cap:"Wewe na mimi"}
+  ],
+  reasons: [
+    {e:"😊", t:"Tabasamu lako", p:"Linaweza kufuta uchovu wa siku nzima kwa sekunde moja tu."},
+    {e:"🤍", t:"Moyo wako", p:"Una upole na wema ambao sijawahi kuuona kwa mtu mwingine."},
+    {e:"🌍", t:"Wewe ni dunia yangu", p:"Nikiwa nawe, kila mahali panakuwa nyumbani."},
+    {e:"💪", t:"Unanipa nguvu", p:"Kwa sababu yako nataka kuwa mtu bora kila siku."},
+    {e:"😂", t:"Vicheko vyetu", p:"Hata siku mbaya inakuwa nzuri nikicheka nawe."},
+    {e:"✨", t:"Wewe tu", p:"Hakuna sababu moja kamili, kwa sababu wewe ni kila kitu."}
+  ],
+  letter:
+`Honey wangu,
+
+Sijui nianzie wapi, kwa sababu maneno hayatoshi kukueleza jinsi ninavyokupenda.
+
+Tangu uingie maishani mwangu, kila kitu kimekuwa na rangi zaidi. Siku zangu zina maana, ndoto zangu zina sababu, na moyo wangu una mahali pa kupumzika.
+
+Asante kwa kunipenda, kunivumilia na kuwa wewe. Ahadi yangu kwako: nitakujali, nitakuheshimu na nitakupenda kila siku ya maisha yangu.
+
+Wewe ni my world, sweetheart wangu, tamu yangu ya milele.
+
+Nakupenda sana, my love. ❤`
+};
+/* ============================ */
+
+document.getElementById('herName').textContent = CONFIG.herName;
+document.getElementById('sign').textContent = CONFIG.signature;
+
+// Rotating nicknames
+const nickEl = document.getElementById('nick'); let ni = 0;
+setInterval(()=>{
+  nickEl.style.opacity = 0;
+  setTimeout(()=>{ ni=(ni+1)%CONFIG.nicknames.length; nickEl.textContent=CONFIG.nicknames[ni]; nickEl.style.opacity=1; },600);
+},2500);
+nickEl.textContent = CONFIG.nicknames[0];
+
+// Counter
+const start = new Date(CONFIG.startDate).getTime();
+function tick(){
+  let diff = Math.max(0, Date.now()-start)/1000;
+  const d=Math.floor(diff/86400); diff-=d*86400;
+  const h=Math.floor(diff/3600); diff-=h*3600;
+  const m=Math.floor(diff/60); const s=Math.floor(diff-m*60);
+  document.getElementById('d').textContent=d;
+  document.getElementById('h').textContent=h;
+  document.getElementById('m').textContent=m;
+  document.getElementById('s').textContent=s;
+}
+tick(); setInterval(tick,1000);
+
+// Reason cards
+const grid = document.getElementById('grid');
+CONFIG.reasons.forEach(r=>{
+  const c=document.createElement('div'); c.className='card';
+  c.innerHTML=`<span class="em">${r.e}</span><h3>${r.t}</h3><p>${r.p}</p>`;
+  grid.appendChild(c);
+});
+const io = new IntersectionObserver(es=>es.forEach((e,i)=>{
+  if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('show'), i*90); io.unobserve(e.target); }
+}),{threshold:.2});
+document.querySelectorAll('.card').forEach(c=>io.observe(c));
+
+
+// Gallery (picha ikikosekana, inaonyesha moyo)
+const gal = document.getElementById('gallery'), lb = document.getElementById('lightbox');
+CONFIG.photos.forEach((p,i)=>{
+  const d=document.createElement('div'); d.className='photo'; d.style.setProperty('--r',((i%2?1:-1)*(1+Math.random()*2))+'deg');
+  const img=new Image(); img.src=p.src; img.alt=p.cap;
+  img.onerror=()=>{ d.querySelector('img')?.remove(); d.insertAdjacentHTML('afterbegin','<div class="ph">❤</div>'); d.dataset.broken=1; };
+  d.appendChild(img);
+  d.insertAdjacentHTML('beforeend',`<div class="cap script">${p.cap}</div>`);
+  d.onclick=()=>{ if(d.dataset.broken) return;
+    document.getElementById('lbImg').src=p.src; document.getElementById('lbCap').textContent=p.cap; lb.classList.add('open'); };
+  gal.appendChild(d); io.observe(d);
+});
+lb.onclick=()=>lb.classList.remove('open');
+
+// Music
+const song=document.getElementById('song'), mbtn=document.getElementById('music'), hint=document.getElementById('hint');
+song.src=CONFIG.music;
+mbtn.onclick=()=>{
+  hint.style.opacity=0;
+  if(song.paused){ song.play().then(()=>mbtn.classList.add('playing')).catch(()=>{hint.textContent='Faili la wimbo halipatikani';hint.style.opacity=.85}); }
+  else { song.pause(); mbtn.classList.remove('playing'); }
+};
+
+// Typewriter letter
+const letterEl=document.getElementById('letter'); let typed=false;
+new IntersectionObserver((es,o)=>{
+  if(es[0].isIntersecting && !typed){
+    typed=true; let i=0;
+    const t=setInterval(()=>{ letterEl.textContent=CONFIG.letter.slice(0,++i); if(i>=CONFIG.letter.length) clearInterval(t); },35);
+    o.disconnect();
+  }
+},{threshold:.4}).observe(letterEl);
+
+// Surprise
+document.getElementById('open').onclick=()=>{
+  document.getElementById('big').classList.add('show');
+  document.getElementById('final').classList.add('show');
+  for(let i=0;i<60;i++) setTimeout(()=>spawn(innerWidth/2+(Math.random()-.5)*300, innerHeight*0.7, true), i*30);
+};
+
+// Swali la mwisho: Hapana kwanza, kisha maneno ya kumpa moyo, kisha Ndiyo
+const steps=[
+  {t:"Utakuwa wangu milele?", p:"Jibu kwa moyo wako ❤", b:"Hapana"},
+  {t:"Usiogope, mpenzi wangu 🥺", p:"Najua moyo wako unajiuliza maswali, lakini mimi nipo hapa nawe, na nakupenda kwa dhati.", b:"Bado nafikiria…"},
+  {t:"Wewe ni wa pekee kwangu 💗", p:"Nitakujali, nitakuheshimu na kukupigania kila siku. Hiyo ni ahadi yangu kwako.", b:"Endelea…"},
+  {t:"Karibu umefika 💞", p:"Kila hatua inakuleta karibu zaidi na moyo wangu, na mimi nakusubiri hapa.", b:"Hapana tena?"},
+  {t:"Hatua moja tu imebaki ✨", p:"Sikiliza moyo wako, kwa sababu kila kitu kizuri huanza kwa kuuamini.", b:null}
+];
+const stepBtn=document.getElementById('step'), yes=document.getElementById('yes'), askBox=document.getElementById('askBox');
+let si=0;
+function showStep(){
+  const s=steps[si];
+  document.getElementById('askTitle').textContent=s.t;
+  document.getElementById('askText').textContent=s.p;
+  if(s.b){ stepBtn.textContent=s.b; stepBtn.style.display=''; yes.style.display='none'; }
+  else { stepBtn.style.display='none'; yes.style.display=''; }
+}
+// "Hapana" haibonyezeki: inakimbia kila anapokaribia, na kila mara maneno ya kumpa moyo yanabadilika
+let lastDodge=0;
+function dodgeNo(e){
+  e.preventDefault(); e.stopPropagation();
+  const now=Date.now(); if(now-lastDodge<450) return; lastDodge=now;
+  if(si>=steps.length-1) return;
+  const r=stepBtn.getBoundingClientRect();
+  spawn(r.left+r.width/2, r.top+r.height/2, true);
+  stepBtn.style.position='fixed';
+  stepBtn.style.transition='left .4s ease, top .4s ease';
+  stepBtn.style.left=(10+Math.random()*(innerWidth-r.width-20))+'px';
+  stepBtn.style.top=(10+Math.random()*(innerHeight-r.height-20))+'px';
+  si++; showStep();
+}
+['mouseenter','pointerdown','touchstart','click'].forEach(ev=>stepBtn.addEventListener(ev,dodgeNo,{passive:false}));
+
+// Moyo mkubwa wenye mioyo midogo na picha yake katikati
+function buildLove(){
+  const layer=document.getElementById('heartsLayer'); layer.innerHTML='';
+  const glyphs=['❤️','💖','💗','💕','💘','💝'];
+  const layers=[{k:1,n:74},{k:.86,n:62},{k:.72,n:50}];
+  let idx=0;
+  layers.forEach(L=>{
+    for(let i=0;i<L.n;i++){
+      const t=i/L.n*2*Math.PI;
+      const x=16*Math.pow(Math.sin(t),3);
+      const y=13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t);
+      const el=document.createElement('span'); el.className='h';
+      el.textContent=glyphs[(idx+i)%glyphs.length];
+      el.style.left=(50+x*2.75*L.k)+'%';
+      el.style.top=(50-(y+2.5)*2.75*L.k)+'%';
+      el.style.fontSize=(.85+.25*L.k).toFixed(2)+'em';
+      el.style.setProperty('--rot',(Math.random()*30-15)+'deg');
+      el.style.animationDelay=(idx*14)+'ms';
+      layer.appendChild(el); idx++;
+    }
+  });
+  const ph=document.getElementById('photoHeart'); ph.innerHTML='';
+  const im=new Image(); im.src=CONFIG.herPhoto; im.alt=CONFIG.herName;
+  im.onerror=()=>{ ph.innerHTML='<div class="phfall">❤<small>Weka picha yake<br>hapa</small></div>'; };
+  ph.appendChild(im);
+  document.getElementById('loveTitle').textContent='Nakupenda, '+CONFIG.herName+' ❤';
+}
+yes.onclick=()=>{
+  buildLove();
+  document.body.classList.add('lovemode');
+  const sc=document.getElementById('love'); sc.classList.add('on');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>sc.classList.add('vis')));
+  let n=0; const t=setInterval(()=>{
+    for(let i=0;i<6;i++) spawn(Math.random()*innerWidth, innerHeight*(.4+Math.random()*.6), true);
+    if(++n>60) clearInterval(t);
+  },100);
+};
+document.getElementById('back').onclick=()=>{
+  const sc=document.getElementById('love'); sc.classList.remove('vis');
+  document.body.classList.remove('lovemode');
+  setTimeout(()=>sc.classList.remove('on'),1000);
+  si=0; showStep(); askBox.style.opacity=1;
+  stepBtn.style.position=''; stepBtn.style.left=''; stepBtn.style.top=''; stepBtn.style.transition='';
+  scrollTo({top:0,behavior:'smooth'});
+};
+
+// Floating hearts canvas
+const cv=document.getElementById('hearts'), ctx=cv.getContext('2d'); let hs=[];
+function resize(){cv.width=innerWidth;cv.height=innerHeight} resize(); addEventListener('resize',resize);
+function spawn(x,y,burst){
+  hs.push({x:x??Math.random()*cv.width, y:y??cv.height+20, s:8+Math.random()*(burst?22:16),
+    vy:-(0.5+Math.random()*(burst?3:1.2)), vx:(Math.random()-.5)*(burst?3:.6), a:.2+Math.random()*.6,
+    c:['#ff4d8d','#ff9ec4','#ffd9a0','#ff2e6e'][Math.floor(Math.random()*4)]});
+}
+function heart(x,y,s){ctx.beginPath();ctx.moveTo(x,y+s/4);
+  ctx.bezierCurveTo(x,y-s/2,x-s,y-s/2,x-s,y+s/4);
+  ctx.bezierCurveTo(x-s,y+s,x,y+s*1.2,x,y+s*1.5);
+  ctx.bezierCurveTo(x,y+s*1.2,x+s,y+s,x+s,y+s/4);
+  ctx.bezierCurveTo(x+s,y-s/2,x,y-s/2,x,y+s/4);ctx.fill()}
+function loop(){
+  ctx.clearRect(0,0,cv.width,cv.height);
+  if(Math.random()<.12) spawn();
+  hs=hs.filter(h=>h.y>-50 && h.a>0);
+  hs.forEach(h=>{h.x+=h.vx+Math.sin(h.y/40)*.4;h.y+=h.vy;
+    ctx.globalAlpha=h.a;ctx.fillStyle=h.c;heart(h.x,h.y,h.s/2);});
+  ctx.globalAlpha=1; requestAnimationFrame(loop);
+}
+loop();
+addEventListener('click',e=>{for(let i=0;i<6;i++)spawn(e.clientX,e.clientY,true)});
+</script>
+</body>
+</html>
