@@ -400,7 +400,7 @@ function buildLove(){
   });
   const ph=document.getElementById('photoHeart'); ph.innerHTML='';
   const im=new Image(); im.src=CONFIG.herPhoto; im.alt=CONFIG.herName;
-  im.onerror=()=>{ ph.innerHTML='<div class="phfall">❤<small>Weka picha yake<br>hapa</small></div>'; };
+  im.onerror=()=>{ ph.innerHTML='<div class="phfall">❤<small>tamu yangu<br>hapa</small></div>'; };
   ph.appendChild(im);
   document.getElementById('loveTitle').textContent='Nakupenda, '+CONFIG.herName+' ❤';
 }
